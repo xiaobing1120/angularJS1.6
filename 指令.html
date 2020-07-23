@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html ng-app="myApp" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+<title>指令</title>
+<script type="text/javascript" src="./js/1.6.4/angular.js"></script>
+<style type="text/css">
+*{ margin: 0; padding: 0; box-sizing: border-box; }
+img{ display: block; width: 50%; margin: 0 auto; }
+ul, ol{ list-style: none; }
+</style>
+</head>
+
+<body ng-controller="myCtrl"  ng-init="data=[
+{name:'Jani',country:'Norway'},
+{name:'Hege',country:'Sweden'},
+{name:'Kai',country:'Denmark'}];names=['Jani','Hege','Kai'];quantity=1;price=5;firstName='John'">
+    
+    <br/><br/>
+    <div ng-cloak>
+
+        <p>在输入框中尝试输入：</p><br/>
+        <label>姓名： <input type="text" ng-model="firstName" /></label><br/>
+        <p>你输入的姓名为：{{firstName}}</p><br/>
+
+        <h2>价格计算器</h2>
+        <label>数量： <input type="text" ng-model="quantity" /></label><br/>
+        <label>价格： <input type="text" ng-model="price" /></label><br/>
+        <p><b>总价：</b>{{quantity * price}}</p><br/>
+
+        <p>使用 ng-repeat 来循环数组</p>
+        <ul>
+            <li ng-repeat="x in names">
+                {{ x }}
+            </li>
+        </ul><br/>
+
+        <p>循环对象：</p>
+        <ul>
+            <li ng-repeat="x in data">
+                {{ x.name + ', ' + x.country }}
+            </li>
+        </ul>
+        <br/>
+
+        <runoob-directive></runoob-directive> <br/>
+
+        <div runoob-directive></div> <br/>
+
+        <div class="runoob-directive"></div> <br/>
+
+        <!-- directive: runoob-directive -->
+
+    </div>
+    <br/><br/>
+</body>
+
+<script type="text/javascript">
+    var app = angular.module('myApp', []);
+    
+    app.controller('myCtrl', function($scope){
+        $scope.myInput = 'hello world!';
+        $scope.list = [1,2,3,4,5];
+        $scope.img = 'http://10.94.10.128/docview/data/test/2020/0717/11/112628_156391_HwfwDki.jpg';
+    });
+    app.directive('runoobDirective', function () {
+        return {
+            //restrict 值可以是以下几种: 默认值为 EA
+            // E 作为元素名使用
+            // A 作为属性使用
+            // C 作为类名使用
+            // M 作为注释使用
+            restrict: 'EACM',
+            template: '<h1>自定义指令！</h1>'
+        }
+    })
+
+</script>
+</html>

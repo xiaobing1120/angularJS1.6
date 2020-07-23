@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html ng-app="myApp" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Select选择框</title>
+    <script type="text/javascript" src="./js/1.6.4/angular.js"></script>
+    <style type="text/css">
+        *{ margin: 0; padding: 0; box-sizing: border-box; }
+        body{ padding: 20px; }
+        img{ display: block; width: 50%; margin: 0 auto; }
+        ul, ol{ list-style: none; }
+    </style>
+</head>
+<body ng-controller="myCtrl">
+
+<!--{{names}}-->
+
+<label>
+    {{selectedName1}}
+    <select ng-model="selectedName1" ng-options="x for x in names"></select>
+</label>
+<br/><br/>
+<label>
+    {{selectedName2}}
+    <select ng-model="selectedName2">
+        <option ng-repeat="x in names">{{ x }}</option>
+    </select>
+</label>
+<br/><br/>
+<label>
+    {{selectedSite1}}
+    <select ng-model="selectedSite1">
+        <option ng-repeat="x in sites" value="{{x.url}}">{{ x.site }}</option>
+    </select>
+</label>
+
+<br/><br/>
+<label>
+    {{selectedSite2}}
+    <select ng-model="selectedSite2" ng-options="x.site for x in sites"></select>
+</label>
+
+
+</body>
+<script type="text/javascript">
+    var app = angular.module('myApp', []);
+    app.controller('myCtrl', function ($scope) {
+        $scope.names = ["Google", "Runoob", "Taobao"];
+        $scope.selectedName1 = $scope.names[1];
+        $scope.selectedName2 = $scope.names[2];
+
+        $scope.sites = [
+            {site : "Google", url : "http://www.google.com"},
+            {site : "Runoob", url : "http://www.runoob.com"},
+            {site : "Taobao", url : "http://www.taobao.com"}
+        ];
+        $scope.selectedSite1 = $scope.sites[0].url;
+        $scope.selectedSite2 = $scope.sites[1];
+    });
+
+</script>
+</html>

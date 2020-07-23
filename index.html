@@ -1,0 +1,231 @@
+<html ng-app="myApp">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+<title>angular.js</title>
+<!-- <script type="text/javascript">
+(function(doc, win) {
+    var docEl = doc.documentElement,
+        resizeEvt =  "orientationchange" in window ? "orientationchange" : "resize",
+        recalc = function() {
+            var clientWidth = docEl.clientWidth || win.innerWidth || doc.documentElement.clientWidth;
+            var r = 100 * (clientWidth / 750);
+            //r = r > 66 ? 66 : r;
+            r = r > 100 ? 100 : r;
+            if (!clientWidth) return;
+            if (clientWidth >= 750) {
+                docEl.style.fontSize = "100px";
+            } else {
+                docEl.style.fontSize = r + "px";
+            }
+            var html = document.getElementsByTagName("html")[0];
+            var settingFs = parseInt(r)
+            var settedFs = settingFs;
+            var whileCount = 0;
+            while (true) {
+                var realFs = parseInt( window.getComputedStyle(html).fontSize );
+                var delta = realFs - settedFs;
+                //不相等
+                if (Math.abs(delta) >= 1) {
+                    if (delta > 0) settingFs--;
+                    else settingFs++;
+                    html.setAttribute(
+                        "style",
+                        "font-size:" + settingFs + "px!important"
+                    );
+                } else break;
+                if (whileCount++ > 100) break;
+            }
+        };
+    if (!doc.addEventListener) return;
+    win.addEventListener(resizeEvt, recalc, false);
+    doc.addEventListener("DOMContentLoaded", recalc, false);
+})(document, window);   
+</script> -->
+<style type="text/css">
+*{ margin: 0; padding: 0; box-sizing: border-box; }
+img{ display: block; width: 50%; margin: 0 auto; }
+ul, ol{ list-style: none; }
+</style>
+</head>
+
+<body ng-controller="myCtrl">
+    <br/><br/>
+    <ul>
+        <li><a href="#red">红色方块试图</a></li>
+        <li><a href="#blue?a=123">蓝色方块试图</a></li>
+    </ul>
+    <p>内容切换:</p>
+    <div ng-view></div>
+    <script type="text/ng-template" id="red.html">
+        <p>{{message}}</p>
+        <div style="width: 100px; height: 100px; background: red;"></div>
+    </script>
+    <script type="text/ng-template" id="blue.html">
+        <p>{{message}}</p>
+        <div style="width: 100px; height: 100px; background: blue;"></div>
+    </script>
+
+    <br/><br/>
+
+    <div>
+        <input type="text" ng-model="myInput" /><br/>
+        {{myInput | uppercase}}
+    </div>
+    <br/><br/>
+
+    <div>
+        <img ng-src="{{img}}"  />
+    </div>
+    <br/><br/>
+
+    <details ng-open=true>
+        <summary>学的不仅是技术，更是梦想！</summary>
+        <p> - 菜鸟教程</p>
+        <p> - 菜鸟教程</p>
+        <p> - 菜鸟教程</p>
+        <p> - 菜鸟教程</p>
+        <p> - 菜鸟教程</p>
+    </details>
+    <br/><br/>
+    <ul id="ul-1">
+        <li ng-repeat="item in list">{{item}}</li>
+    </ul>
+    <br/><br/>
+    <p>货币符号：{{ 250 | currency:"RMB" }}</p>
+    <p>正数截取4位：{{"1234567890" | limitTo :4}} </p>
+    <p>负数截取4位：{{"1234567890" | limitTo:-4}} </p>
+    <p>保留2位小数点：{{149016.1945000 | number:2}}</p>
+    <p>time转化为时间：{{1490161945000 | date:"yyyy-MM-dd HH:mm:ss"}}</p>
+
+    <br/><br/>
+    <form>
+        选择一个选项:
+        <label><input type="radio" ng-model="myVar" value="dogs">Dogs</label>
+        <label><input type="radio" ng-model="myVar" value="tuts">Tutorials</label>
+        <label><input type="radio" ng-model="myVar" value="cars">Cars</label>
+    </form>
+    <br/><br/>
+    <div ng-switch="myVar">
+        <div ng-switch-when="dogs">
+            <h1>Dogs</h1>
+            <p>Welcome to a world of dogs.</p>
+        </div>
+        <div ng-switch-when="tuts">
+            <h1>Tutorials</h1>
+            <p>Learn from examples.</p>
+        </div>
+        <div ng-switch-when="cars">
+            <h1>Cars</h1>
+            <p>Read about cars.</p>
+        </div>
+    </div>
+
+    <br/><br/>
+
+    <form name="myForm">
+        <label for="in_text">姓名:</label>
+        <input id="in_text" type="text" ng-model="in_text" name="myName" required/>
+        <span ng-show="myForm.myName.$error.required">(姓名为必填项)</span>
+       
+        <button ng-click="ok()">提交</button>
+    </form>
+
+    <br/><br/>
+
+    <directive-Name></directive-Name>
+
+    <br/><br/>
+    
+    <span on-ot-finish-render-filters>渲染完成事件触发</span>
+
+    <br/><br/>
+
+    //重定义元素系统事件
+    <input type="file" id="upload" custom-on-change="uploadFile">
+
+</body>
+<script type="text/javascript" src="./js/1.6.4/angular.js"></script>
+<script type="text/javascript" src="./js/1.6.4/angular-route.js"></script>
+<script type="text/javascript">
+    var app = angular.module('myApp', ['ngRoute']);
+    app.config(["$locationProvider", "$routeProvider", function($locationProvider,$routeProvider){
+        $locationProvider.hashPrefix(''); // 1.6.x版本使用路由功能需加上这句
+        $routeProvider.when('/red', {
+            templateUrl: 'red.html',
+            controller: 'redController'
+        }).when('/blue', {
+            templateUrl: 'blue.html',
+            controller: 'redController',
+            //依赖的条件
+            resolve: {
+                //延时1秒切换视图
+                delay: function($q, $timeout){
+                    var delay = $q.defer();
+                    $timeout(delay.resolve, 1000)
+                    return delay.promise;
+                }
+            }
+        }).otherwise({
+            //重定向地址
+            redirectTo: '/red' //默认显示红色方块视图
+        });
+    }]);
+    app.controller('redController', function($scope) {
+        $scope.message = "当前显示的是红色方块视图"; //red作用域
+    });
+    app.controller('redController', function($scope, $routeParams) {
+        $scope.message = "当前显示的是蓝色方块视图"; //blue作用域
+        console.log($routeParams);//传递参数
+    });
+    app.controller('myCtrl', function($scope){
+        $scope.myInput = 'hello world!';
+        $scope.list = [1,2,3,4,5];
+        $scope.img = 'http://10.94.10.128/docview/data/test/2020/0717/11/112628_156391_HwfwDki.jpg';
+        $scope.in_text = '';
+        $scope.ok = function() {
+            console.log("姓名：", $scope.in_text);
+            console.log("-----------------分割线--------------------");
+        }
+        $scope.$on('ot_ngRepeatFinished', function(){
+            console.log('ot_ngRepeatFinished')
+        })
+    });
+    app.directive('onOtFinishRenderFilters', function($timeout){
+        return {
+            restrict: 'A',
+            link: function(scope, element, attr) {
+                $timeout(function(){
+                    scope.$emit('ot_ngRepeatFinished')
+                });
+            }
+        }
+    });
+    app.directive('directiveName', function(){
+        return {
+            restrict: 'EACM',
+            template: '<p>helloWorld</p>',
+            replace: true,
+            link: function(scope, element, attrs){
+                console.log(scope);
+                console.log(element);
+                console.log(attrs);
+            }
+        }
+    });
+    app.directive('customOnChange', function() {
+        return {
+            restrict: 'A',
+            link: function(scope, element, attr) {
+                var onChangeHandler = scope.$eval(attr.customOnChange);
+                element.bind('change', onChangeHandler);
+            }
+        };
+    });
+
+
+
+
+
+</script>
+</html>

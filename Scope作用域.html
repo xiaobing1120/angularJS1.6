@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html ng-app="myApp" lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Scope作用域</title>
+<script type="text/javascript" src="./js/1.6.4/angular.js"></script>
+<style type="text/css">
+    *{ margin: 0; padding: 0; box-sizing: border-box; }
+    img{ display: block; width: 50%; margin: 0 auto; }
+    ul, ol{ list-style: none; }
+    input.ng-invalid {
+        background-color: lightblue;
+    }
+</style>
+
+</head>
+<body>
+
+    <div ng-controller="myCtrl-1">
+        <label>名字：<input type="text" ng-model="name" /></label><br/>
+        <h1>{{ greeting }}</h1><br/>
+        <button ng-click="sayHello()">点我</button>
+    </div>
+    <br/><br/>
+    <div ng-controller="myCtrl-2">
+        {{ lastname }}
+        <ul>
+            <li ng-repeat="x in names">{{ x }}</li>
+        </ul>
+    </div>
+
+
+
+
+
+</body>
+<script type="text/javascript">
+    var app = angular.module('myApp', []);
+
+    app.controller('myCtrl-1', function($scope, $rootScope){
+        $scope.name = 'Runoob';
+        $rootScope.lastname = 'Refsnes';
+        $scope.sayHello = function () {
+            $scope.greeting = 'Hello ' + $scope.name + '!'
+        }
+    });
+    app.controller('myCtrl-2', function($scope){
+        $scope.names = ["Emil", "Tobias", "Linus"];
+    });
+
+
+</script>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html ng-app="myApp" lang="en">
+<head>
+<meta charset="UTF-8">
+<title>模型</title>
+<script type="text/javascript" src="./js/1.6.4/angular.js"></script>
+<style type="text/css">
+    *{ margin: 0; padding: 0; box-sizing: border-box; }
+    img{ display: block; width: 50%; margin: 0 auto; }
+    ul, ol{ list-style: none; }
+    input.ng-invalid {
+        background-color: lightblue;
+    }
+</style>
+
+</head>
+<body ng-controller="myCtrl">
+
+    <div>
+        <label>名字：<input type="text" ng-model="name" /></label>
+        <p>你输入了: {{name}}</p>
+    </div>
+
+    <form name="myForm">
+        <label>
+            Email:
+            <input type="email" name="myAddress" ng-model="email" required />
+        </label>
+        <span ng-show="myForm.myAddress.$error.email">不是一个合法的邮箱地址</span>
+        <h3>状态</h3>
+        {{ myForm.myAddress.$valid }}
+        {{ myForm.myAddress.$dirty }}
+        {{ myForm.myAddress.$touched }}
+        <!-- ng-model 指令根据表单域的状态添加/移除以下类：
+                ng-empty
+                ng-not-empty
+                ng-touched
+                ng-untouched
+                ng-valid
+                ng-invalid
+                ng-dirty
+                ng-pending
+                ng-pristine -->
+    </form>
+
+
+</body>
+<script type="text/javascript">
+    var app = angular.module('myApp', []);
+
+    app.controller('myCtrl', function($scope){
+        $scope.name = 'John Doe';
+        $scope.list = [1,2,3,4,5];
+        $scope.img = 'http://10.94.10.128/docview/data/test/2020/0717/11/112628_156391_HwfwDki.jpg';
+    });
+
+</script>
+</html>
