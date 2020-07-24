@@ -1,0 +1,22 @@
+<h1>菜鸟教程</h1>
+<p>这是一个被包含的 HTML 页面，使用 ng-include 指令来实现！</p>
+<br/>
+<table>
+    <tr >
+        <th>序号</th>
+        <th ng-repeat="(x,y) in names[0]">{{ x }}</th>
+    </tr>
+    <tr ng-repeat="x in names | orderBy: 'Country'">
+        <td>{{ $index + 1 }}</td>
+        <td>{{ x.Name }}</td>
+        <td>{{ x.City }}</td>
+        <td>{{ x.Country | uppercase }}</td>
+    </tr>
+</table>
+
+<style type="text/css">
+table,th,td{ border-collapse: collapse; border: 1px solid grey; }
+table tr:nth-child(odd) { background-color: #f1f1f1;  }
+table tr:nth-child(even) { background-color: #fff; }
+th,td{ padding: 5px; color: #666 }
+</style>

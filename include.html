@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html ng-app="myApp" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>include</title>
+    <script type="text/javascript" src="./js/1.6.4/angular.js"></script>
+    <style type="text/css">
+        *{ margin: 0; padding: 0; box-sizing: border-box; }
+        body{ padding: 20px; }
+        img{ display: block; width: 50%; margin: 0 auto; }
+        ul, ol{ list-style: none; }
+    </style>
+</head>
+<body ng-controller="myCtrl" ng-cloak>
+
+    <br/><br/>
+    <div ng-include="'test.html'"></div><br/><br/>
+    <div ng-include="'https://c.runoob.com/runoobtest/angular_include.php'"></div>
+</body>
+<script type="text/javascript">
+    var app = angular.module('myApp', []);
+    app.controller('myCtrl', function ($scope) {
+        $scope.names = ["Google", "Runoob", "Taobao"];
+        $scope.firstname = 'John';
+        $scope.lastName = 'Doe';
+        $scope.names = [
+            {"Name":"Alfreds Futterkiste","City":"Berlin","Country":"Germany"},
+            {"Name":"Ana Trujillo Emparedados y helados","City":"México D.F.","Country":"Mexico"},
+            {"Name":"Antonio Moreno Taquería","City":"México D.F.","Country":"Mexico"},
+            {"Name":"Around the Horn","City":"London","Country":"UK"},
+            {"Name":"B's Beverages","City":"London","Country":"UK"},
+            {"Name":"Berglunds snabbköp","City":"Luleå","Country":"Sweden"},
+            {"Name":"Blauer See Delikatessen","City":"Mannheim","Country":"Germany"},
+            {"Name":"Blondel père et fils","City":"Strasbourg","Country":"France"},
+            {"Name":"Bólido Comidas preparadas","City":"Madrid","Country":"Spain"},
+            {"Name":"Bon app'","City":"Marseille","Country":"France"},
+            {"Name":"Bottom-Dollar Marketse","City":"Tsawassen","Country":"Canada"},
+            {"Name":"Cactus Comidas para llevar","City":"Buenos Aires","Country":"Argentina"},
+            {"Name":"Centro comercial Moctezuma","City":"México D.F.","Country":"Mexico"},
+            {"Name":"Chop-suey Chinese","City":"Bern","Country":"Switzerland"},
+            {"Name":"Comércio Mineiro","City":"São Paulo","Country":"Brazil"}
+        ];
+    });
+    app.config(function($sceDelegateProvider) {
+        $sceDelegateProvider.resourceUrlWhitelist([
+            '**',
+            //'http://60.64.21.236:5000/',
+            //'https://c.runoob.com/runoobtest/**'
+        ]);
+    });
+
+</script>
+</html>

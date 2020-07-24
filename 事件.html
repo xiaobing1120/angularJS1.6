@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html ng-app="myApp" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件</title>
+    <script type="text/javascript" src="./js/1.6.4/angular.js"></script>
+    <style type="text/css">
+        *{ margin: 0; padding: 0; box-sizing: border-box; }
+        body{ padding: 20px; }
+        img{ display: block; width: 50%; margin: 0 auto; }
+        ul, ol{ list-style: none; }
+    </style>
+</head>
+<body ng-controller="myCtrl">
+
+
+    <button ng-click="count = count  + 1">点我！</button><br/><br/>
+    <p>count: {{ count }}</p>
+    <br/><br/>
+
+    <button ng-click="toggle()">隐藏/显示</button><br/>
+    <p ng-hide="myVar">
+        <label>姓: <input type="text" ng-model="firstName"></label><br>
+        <label>名: <input type="text" ng-model="lastName"></label><br>
+        <br>
+        Full Name: {{firstName + " " + lastName}}
+    </p>
+
+    <p ng-show="myVar">
+        <label>名: <input type="text" ng-model="firstName"></label><br>
+        <label>姓: <input type="text" ng-model="lastName"></label><br>
+        <br>
+        姓名: {{firstName + " " + lastName}}
+    </p>
+
+
+</body>
+<script type="text/javascript">
+    var app = angular.module('myApp', []);
+    app.controller('myCtrl', function ($scope) {
+        $scope.count  = 0;
+        $scope.names = ["Google", "Runoob", "Taobao"];
+        $scope.firstName = 'John';
+        $scope.lastName = 'Doe';
+        $scope.myVar = false;
+        $scope.toggle = function () {
+            $scope.myVar = !$scope.myVar;
+        }
+    });
+
+</script>
+</html>

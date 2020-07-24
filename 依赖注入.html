@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="myApp" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>依赖注入</title>
+    <script type="text/javascript" src="./js/1.6.4/angular.js"></script>
+    <style type="text/css">
+c        body{ padding: 20px; }
+        img{ display: block; width: 50%; margin: 0 auto; }
+        ul, ol{ list-style: none; }
+    </style>
+</head>
+<body ng-cloak ng-controller="myCtrl">
+
+    <br/><br/>
+    <p>依赖注入: {{ defaultInput }}</p>
+
+
+</body>
+<script type="text/javascript">
+    var app = angular.module('myApp', []);
+
+    app.value("defaultInput", 5);
+
+    app.controller('myCtrl', function ($scope, CalcService, defaultInput) {
+        $scope.number = defaultInput;
+        $scope.result = CalcService.square($scope.number);
+        $scope.square = function() {
+            scope.result = CalcService.square($scope.number);
+        };
+
+        $scope.names = ["Google", "Runoob", "Taobao"];
+        $scope.firstname = 'John';
+        $scope.lastName = 'Doe';
+
+    });
+
+</script>
+</html>

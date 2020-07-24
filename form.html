@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html ng-app="myApp" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>form</title>
+    <script type="text/javascript" src="./js/1.6.4/angular.js"></script>
+    <style type="text/css">
+        *{ margin: 0; padding: 0; box-sizing: border-box; }
+        body{ padding: 20px; }
+        img{ display: block; width: 50%; margin: 0 auto; }
+        ul, ol{ list-style: none; }
+    </style>
+</head>
+<body ng-controller="myCtrl" ng-cloak>
+
+<form novalidate>
+    <label>
+        First Name: <input type="text" ng-model="firstname">
+    </label>
+    <br/>
+    <p>firstname: {{ firstname }}</p>
+    <label>
+        多选框: <input type="checkbox" ng-model="myVar">
+    </label>
+    <br/>
+    <p>myVar: {{ myVar }}</p>
+    <label>单选框: <input type="radio" ng-model="radio" value="dogs">Dogs</label>
+    <label><input type="radio" ng-model="radio" value="tuts">Tutorials</label>
+    <label><input type="radio" ng-model="radio" value="cars">Cars</label>
+    <br/>
+    <p>radio: {{ radio }}</p>
+    <br/>
+    <label>
+        <select ng-model="sel">
+            <option value="dogs">Dogs</option>
+            <option value="tuts">Tutorials</option>
+            <option value="cars">Cars</option>
+        </select>
+    </label>
+    <br/>
+    <p>select: {{ sel }}</p>
+    <br/>
+</form>
+
+
+<form name="myForm" novalidate>
+    <div>
+        <label>
+            用户名：<input type="text" name="user" ng-model="user" required />
+        </label>
+        <span ng-show="myForm.user.$pristine">用户名是必须的</span>
+        <span style="color: red;"  ng-show="myForm.user.$dirty && myForm.user.$error.required">用户名是必须的。</span>
+    </div>
+    <div>
+        <label>
+            邮箱：<input type="email" name="email" ng-model="email" required />
+        </label>
+        <span ng-show="myForm.email.$pristine">邮箱是必须的</span>
+        <span style="color: red;" ng-show="myForm.email.$dirty && myForm.email.$error.required">邮箱是必须的。</span>
+        <span style="color: red;" ng-show="myForm.email.$error.email">非法的邮箱。</span>
+    </div>
+    <div>
+        <input type="submit" ng-disabled="myForm.user.$dirty && myForm.user.$invalid ||  myForm.email.$dirty && myForm.email.$invalid" />
+    </div>
+</form>
+
+<!--$dirty	表单有填写记录-->
+<!--$valid	字段内容合法的-->
+<!--$invalid	字段内容是非法的-->
+<!--$pristine	表单没有填写记录-->
+
+
+    <br/><br/>
+
+
+
+</body>
+<script type="text/javascript">
+    var app = angular.module('myApp', []);
+    app.controller('myCtrl', function ($scope) {
+        $scope.names = ["Google", "Runoob", "Taobao"];
+        $scope.myVar = true;
+        $scope.radio = true;
+        $scope.sel= 'cars';
+        $scope.firstname = 'John';
+        $scope.lastName = 'Doe';
+    });
+
+    app.directive('runoobDirective', function () {
+        return {
+            template: '我在指令构造器中创建！'
+        }
+    })
+
+</script>
+</html>
